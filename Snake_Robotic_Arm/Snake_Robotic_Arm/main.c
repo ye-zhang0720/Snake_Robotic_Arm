@@ -17,23 +17,19 @@ int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
     
+    /*定义DH参数*/
     /*               theta,   d,     a,    alpha                     */
-    double DH[FREEDOM][4] = {{0,     0,     0.052,     PI/2},
-                        {0,     0,     0.052,     PI/2},
-                        {0,     0,     0.052,     PI/2},
-                        {0,     0,     0.052,     PI/2},
-                        {0,     0,     0.052,     PI/2},
-                        {0,     0,     0.059,     PI/2},};
+    double DH_par[FREEDOM][4] = {{0,     0,     0.052,     PI/2},
+                                 {0,     0,     0.052,     PI/2},
+                                 {0,     0,     0.052,     PI/2},
+                                 {0,     0,     0.052,     PI/2},
+                                 {0,     0,     0.052,     PI/2},
+                                 {0,     0,     0.059,     PI/2}};
     
-    //double b[2][2] = {{3,2},{2,1}};
     
-    Matrix *A = InitMatrix(A, FREEDOM, 4);
-    //Matrix *B = InitMatrix(B, 1, 3);
+    Matrix *DH = InitMatrix(DH, FREEDOM, 4);
     
-    ValueMatrix(A, DH);
-    //ValueMatrix(B, b);
-    //printf("%f",GetValue(A, 1, 3));
-    
+    ValueMatrix(DH, DH_par);
     
     Matrix* T[FREEDOM];
     for (int i = 0; i < FREEDOM; i ++) {
@@ -41,7 +37,7 @@ int main(int argc, const char * argv[]) {
         IdentityMatrix(T[i]);
     }
     
-    Forward_Kinematics(A, T, FREEDOM);
+    Forward_Kinematics(DH, T, FREEDOM);
     
     
     
@@ -51,24 +47,9 @@ int main(int argc, const char * argv[]) {
     Jacobian(T, J, FREEDOM);
     
     
-    
-//    for (int i = 0; i < FREEDOM; i++) {
-//        PrintMatrix(T[i]);
-//        printf("\n\n\n");
-//    }
-    
     PrintMatrix(J);
 
-    
-    //printf("\n\n\n");
-    
-    
-    //PrintMatrix(MulMatrix(A,B));
-    
-//    //printf("\n\n\n");
-//    PrintMatrix(B);
-//    printf("\n\n\n");
-//    PrintMatrix(Inv(B));
+
     
     
     return 0;
