@@ -88,15 +88,15 @@ void Jacobian(Matrix* T[], Matrix* J, int n)
         z_i = MulMatrix(R, k);
         
         temp = cross(z_i, MulMatrix(R, p_i_n));
-        
-        
-        ValueOneMatrix(J, temp->data[0], 0, i);
-        ValueOneMatrix(J, temp->data[1], 1, i);
-        ValueOneMatrix(J, temp->data[2], 2, i);
-        
-        ValueOneMatrix(J, z_i->data[0], 3, i);
-        ValueOneMatrix(J, z_i->data[1], 4, i);
-        ValueOneMatrix(J, z_i->data[2], 5, i);
+        if (i < n-1) {
+            ValueOneMatrix(J, temp->data[0], 0, i);
+            ValueOneMatrix(J, temp->data[1], 1, i);
+            ValueOneMatrix(J, temp->data[2], 2, i);
+            
+            ValueOneMatrix(J, z_i->data[0], 3, i);
+            ValueOneMatrix(J, z_i->data[1], 4, i);
+            ValueOneMatrix(J, z_i->data[2], 5, i);
+        }
     }
 }
 
