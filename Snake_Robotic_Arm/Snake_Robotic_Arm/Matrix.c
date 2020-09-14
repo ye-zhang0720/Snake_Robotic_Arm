@@ -322,7 +322,7 @@ Matrix* Inv(Matrix* A)
     
     int n = A->row;   //矩阵阶数
     Matrix *B = InitMatrix(B, A->row, A->column);      //结果矩阵
-    Matrix *t = InitMatrix(t, A->row, A->column);                //临时矩阵
+    Matrix *t = InitMatrix(t, A->row, A->column);      //临时矩阵
     //将A矩阵存放在临时矩阵中
     
     for (i = 0; i < n; i++)

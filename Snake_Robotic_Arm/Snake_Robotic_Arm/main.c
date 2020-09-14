@@ -60,9 +60,32 @@ int main(int argc, const char * argv[]) {
     
     
     PrintMatrix(J);
-
-
     
+    printf("\n\n\n");
+    
+    double speed[]={0,0,0,0.04,0,0};  //末端运动速度（只有x轴旋转）
+    Matrix *Speed = InitMatrix(Speed, 6, 1);
+    ValueMatrix(Speed, speed);
+    
+    float detT=0.1;           //时间步长
+    
+    Matrix *detq = MulMatrix(Inv(J), Speed);
+    PrintMatrix(detq);
+    printf("\n\n\n");
+    
+    TransMatrix(detq);
+    NumMulMatrix(detq, detT);
+    PrintMatrix(detq);
+    printf("\n\n\n");
+    
+    
+    double S[] = {-10*du,30*du,40*du,30*du,80*du,30*du};
+    
+    for (int i = 0; i < detq->column; i++) {
+        ValueOneMatrix(detq, GetValue(detq, 0, i)+S[i], 0, i);
+    }
+    
+    PrintMatrix(detq);
     
     return 0;
 }
